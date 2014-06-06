@@ -3,8 +3,8 @@
 /* Controllers */
 
 angular.module('myApp.controllers', [])
-  .controller('PhoneBookListCtrl', ['$scope', 'PhoneBooksFactory', 'PhoneBookFactory', 'PhoneBooksDownloadFactory', '$location',
-    function ($scope, PhoneBooksFactory, PhoneBookFactory, PhoneBooksDownloadFactory, $location) {
+  .controller('PhoneBookListCtrl', ['$scope', 'PhoneBooksFactory', 'PhoneBookFactory', 'PhoneBooksDownloadFactory', 'PhoneBooksUploadFactory', '$location', '$upload',
+    function ($scope, PhoneBooksFactory, PhoneBookFactory, PhoneBooksDownloadFactory, PhoneBooksUploadFactory, $location, $upload) {
 
       $scope.editPhoneBook = function (phoneBookId) {
         $location.path('/phoneBook-detail/' + phoneBookId);
@@ -23,6 +23,20 @@ angular.module('myApp.controllers', [])
         PhoneBooksDownloadFactory.query();
         $scope.phoneBooks = PhoneBooksFactory.query();
       };
+
+      $scope.onFileSelect = function($files) {
+        //$files: an array of files selected, each file has name, size, and type.
+        for (var i = 0; i < $files.length; i++) {
+
+          var file = $files[i];
+          var reader = new FileReader();
+          reader.onload = function() {
+            PhoneBooksUploadFactory.create({ 'phone_books': this.result });
+          };
+          reader.readAsText(file);
+        }
+      };
+
 
       $scope.phoneBooks = PhoneBooksFactory.query();
       $scope.downloadUrl = "http://localhost:9292/api/v1/phone_books/download"

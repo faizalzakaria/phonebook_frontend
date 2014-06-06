@@ -19,6 +19,12 @@ services.factory('PhoneBooksDownloadFactory', function ($resource) {
     })
 });
 
+services.factory('PhoneBooksUploadFactory', function ($resource) {
+    return $resource(baseUrl + '/phone_books/upload', {}, {
+        create: { method: 'POST', isArray: true },
+    })
+});
+
 services.factory('PhoneBookFactory', function ($resource) {
     return $resource(baseUrl + '/phone_books/:id', {}, {
         show: { method: 'GET' },

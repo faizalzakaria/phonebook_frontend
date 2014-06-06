@@ -7,7 +7,8 @@ angular.module('myApp', [
   'myApp.filters',
   'myApp.services',
   'myApp.directives',
-  'myApp.controllers'
+  'myApp.controllers',
+  'angularFileUpload'
 ])
 .config(function ($routeProvider, $httpProvider) {
   $routeProvider.when('/phoneBook-list', {templateUrl: 'partials/phone_book-list.html', controller: 'PhoneBookListCtrl'});
