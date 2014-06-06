@@ -13,6 +13,12 @@ services.factory('PhoneBooksFactory', function ($resource) {
     })
 });
 
+services.factory('PhoneBooksDownloadFactory', function ($resource) {
+    return $resource(baseUrl + '/phone_books/download', {}, {
+        query: { method: 'GET' },
+    })
+});
+
 services.factory('PhoneBookFactory', function ($resource) {
     return $resource(baseUrl + '/phone_books/:id', {}, {
         show: { method: 'GET' },

@@ -3,8 +3,8 @@
 /* Controllers */
 
 angular.module('myApp.controllers', [])
-  .controller('PhoneBookListCtrl', ['$scope', 'PhoneBooksFactory', 'PhoneBookFactory', '$location',
-    function ($scope, PhoneBooksFactory, PhoneBookFactory, $location) {
+  .controller('PhoneBookListCtrl', ['$scope', 'PhoneBooksFactory', 'PhoneBookFactory', 'PhoneBooksDownloadFactory', '$location',
+    function ($scope, PhoneBooksFactory, PhoneBookFactory, PhoneBooksDownloadFactory, $location) {
 
       $scope.editPhoneBook = function (phoneBookId) {
         $location.path('/phoneBook-detail/' + phoneBookId);
@@ -19,7 +19,13 @@ angular.module('myApp.controllers', [])
         $location.path('/phoneBook-creation');
       };
 
+      $scope.downloadPhoneBook = function () {
+        PhoneBooksDownloadFactory.query();
+        $scope.phoneBooks = PhoneBooksFactory.query();
+      };
+
       $scope.phoneBooks = PhoneBooksFactory.query();
+      $scope.downloadUrl = "http://localhost:9292/api/v1/phone_books/download"
 
     }])
   .controller('PhoneBookDetailCtrl', ['$scope', '$routeParams', 'PhoneBookFactory', '$location',
@@ -43,5 +49,6 @@ angular.module('myApp.controllers', [])
     $scope.createNewPhoneBook = function () {
       PhoneBooksFactory.create($scope.phoneBook);
       $location.path('/phoneBook-list');
+      $scope.phoneBooks = PhoneBooksFactory.query();
     }
   }]);

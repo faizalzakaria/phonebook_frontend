@@ -11,10 +11,24 @@
     <tr ng-repeat="phoneBook in phoneBooks">
       <td>{{ phoneBook['phone_book'].name }}</td>
       <td>{{ phoneBook['phone_book'].phone }}</td>
-      <td><a ng-click="editPhoneBook(phoneBook['phone_book'].id)">edit</a></td>
-      <td><a ng-click="deletePhoneBook(phoneBook['phone_book'].id)">delete</a></td>
+      <td><a ng-click="editPhoneBook(phoneBook['phone_book'].id)"><button>edit</button></a></td>
+      <td><a ng-click="deletePhoneBook(phoneBook['phone_book'].id)"><button>delete</button></a></td>
     </tr>
   </tbody>
 </table>
-<a ng-click="createNewPhoneBook()" class="btn btn-small">create new phoneBook</a>
-</div>
+
+<a ng-click="createNewPhoneBook()" class="btn btn-small">
+  <button>create new phoneBook</button>
+</a>
+</br>
+
+<a target="_self" href="{{ downloadUrl }}">
+  <button>download csv</button>
+</a>
+<br>
+
+<a target="_self" href="{{ downloadUrl }}">
+  <button>upload phone book</button>
+</a>
+<br>
+
