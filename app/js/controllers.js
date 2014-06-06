@@ -26,7 +26,7 @@ angular.module('myApp.controllers', [])
     function ($scope, $routeParams, PhoneBookFactory, $location) {
 
     $scope.updatePhoneBook = function () {
-      PhoneBookFactory.update($scope.phoneBook);
+      PhoneBookFactory.update({id: $routeParams.id}, $scope.phoneBook);
       $location.path('/phoneBook-list');
     };
 
